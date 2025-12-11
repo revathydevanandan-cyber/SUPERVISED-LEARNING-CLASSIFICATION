@@ -1,0 +1,19 @@
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import preprocessing
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+df=pd.read_csv('C:\\Users\\hp\\Downloads\\IRIS.csv')
+print(df)
+df.isnull().sum()
+x=df[['sepal_length','sepal_width']]
+y=df['species_lab']
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+model=LogisticRegression()
+model.fit(x_train,y_train)
+y_pred=model.predict(x_test)
+accuracy=accuracy_score(y_test,y_pred)
+accuracy
