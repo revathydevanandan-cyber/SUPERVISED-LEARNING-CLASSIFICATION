@@ -1,0 +1,24 @@
+from sklearn import preprocessing
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+df.isnull().sum()
+df['age']=df['age'].fillna(df['age'].median())
+df.drop(['sibsp','parch','fare','embarked','who','deck','embark_town'],axis=1)
+from sklearn.preprocessing import LabelEncoder
+labenc=LabelEncoder()
+df['sex_lab']=labenc.fit_transform(df['sex'])
+df['adult_male_lab']=labenc.fit_transform(df['adult_male'])
+df['class_lab']=labenc.fit_transform(df['class'])
+
+a=df[['sex_lab','adult_male_lab','class_lab','age']]
+a
+y=df['survived']
+x=a
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+x_train,y_train,x_test,y_test
+lgr=LogisticRegression()
+lgr.fit(x_train,y_train)
+y_pred=lgr.predict(x_test)
+accuracy=accuracy_score(y_test,y_pred)
+accuracy
